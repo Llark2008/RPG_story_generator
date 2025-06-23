@@ -45,3 +45,18 @@ checker.build_index(["fact one", "fact two"])
 score = checker.score("Is fact one mentioned?")
 ```
 
+## Utility helpers
+
+Common helpers are collected under `rpggen.utils`.
+
+```python
+from rpggen.utils.text import slugify, chinese_length
+from rpggen.utils.id import hash_id
+from rpggen.utils.log import get_logger
+
+slug = slugify("Hello World!")
+length = chinese_length("你好世界")
+uid = hash_id("some text")
+logger = get_logger("demo")
+```
+
