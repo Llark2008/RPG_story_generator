@@ -33,12 +33,16 @@ class WorldBuilder(BaseNode):
         }
 
     def build_prompt(self) -> str:
+        schema = World.model_json_schema()
         base = (
-            "你是一位世界观设计师。基于以下控制参数生成 JSON:\n"
+            "你是一位世界观设计师。基于以下控制参数生成符合给定 JSON 模型的数据，"
+            "仅返回 JSON:\n"
             "{{ cfg | tojson(indent=2) }}\n"
+            "模型:\n"
+            "{{ schema | tojson(indent=2) }}\n"
         )
         template = Template(base + self.prompt_override)
-        return template.render(cfg=self.render_cfg)
+        return template.render(cfg=self.render_cfg, schema=schema)
 
     def call_llm(self, prompt: str) -> str:
         """Call the language model or fall back to a stub world."""
