@@ -37,7 +37,7 @@
       "title": "Death"
     },
     "biography": {
-      "minLength": 100,
+      "minLength": 40,
       "title": "Biography",
       "type": "string"
     }

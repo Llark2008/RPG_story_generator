@@ -20,7 +20,7 @@
     },
     "description": {
       "maxLength": 180,
-      "minLength": 100,
+      "minLength": 40,
       "title": "Description",
       "type": "string"
     }
