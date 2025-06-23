@@ -80,8 +80,9 @@ importing `rpggen.models`. CI verifies they are up to date.
 
 ## Pipeline CLI
 
-The project ships with a small Typer-based command line application to run
-pipeline nodes. Two demo nodes are provided:
+The project ships with a Typer-based command line application to run
+pipeline nodes. `node1` is the fully featured world generator while
+`node2` remains a lightweight stub:
 
 ```
 $ poetry run rpggen node1 --config world.yml

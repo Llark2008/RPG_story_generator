@@ -9,7 +9,8 @@ import typer
 import yaml
 
 from .runner.base_node import BaseNode
-from .runner.dummy_nodes import CharacterBuilder, WorldBuilder
+from .runner.dummy_nodes import CharacterBuilder
+from .runner.world_builder import WorldBuilder
 
 app = typer.Typer(help="RPG generator CLI")
 
