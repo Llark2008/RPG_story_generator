@@ -1,0 +1,52 @@
+{
+  "properties": {
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "faction_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Faction Id"
+    },
+    "role": {
+      "title": "Role",
+      "type": "string"
+    },
+    "birth": {
+      "title": "Birth",
+      "type": "integer"
+    },
+    "death": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Death"
+    },
+    "biography": {
+      "title": "Biography",
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "role",
+    "birth",
+    "biography"
+  ],
+  "title": "NotableFigure",
+  "type": "object"
+}

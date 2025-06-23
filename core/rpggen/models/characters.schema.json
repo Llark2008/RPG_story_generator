@@ -1,0 +1,175 @@
+{
+  "properties": {
+    "id": {
+      "pattern": "^[a-z0-9_]+$",
+      "title": "Id",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "aliases": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Aliases"
+    },
+    "faction_id": {
+      "title": "Faction Id",
+      "type": "string"
+    },
+    "gender": {
+      "enum": [
+        "male",
+        "female",
+        "nonbinary",
+        "unknown"
+      ],
+      "title": "Gender",
+      "type": "string"
+    },
+    "birth": {
+      "exclusiveMinimum": 0,
+      "title": "Birth",
+      "type": "integer"
+    },
+    "death": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Death"
+    },
+    "age": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Age"
+    },
+    "occupation": {
+      "title": "Occupation",
+      "type": "string"
+    },
+    "personality": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Personality",
+      "type": "array"
+    },
+    "values": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Values",
+      "type": "array"
+    },
+    "motives": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Motives",
+      "type": "array"
+    },
+    "skills": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Skills",
+      "type": "array"
+    },
+    "secrets": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Secrets"
+    },
+    "appearance": {
+      "title": "Appearance",
+      "type": "string"
+    },
+    "signature_items": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Signature Items"
+    },
+    "backstory": {
+      "maxLength": 220,
+      "minLength": 120,
+      "title": "Backstory",
+      "type": "string"
+    },
+    "relationship_seeds": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Relationship Seeds"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "faction_id",
+    "gender",
+    "birth",
+    "occupation",
+    "personality",
+    "values",
+    "motives",
+    "skills",
+    "appearance",
+    "backstory"
+  ],
+  "title": "Character",
+  "type": "object"
+}
