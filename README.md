@@ -82,12 +82,14 @@ importing `rpggen.models`. CI verifies they are up to date.
 
 The project ships with a Typer-based command line application to run
 pipeline nodes. `node1` is the fully featured world generator while
-`node2` remains a lightweight stub:
+`node2` remains a lightweight stub.
+
+Example configuration files can be found in the `examples/` directory:
 
 ```
-$ poetry run rpggen node1 --config world.yml
-$ poetry run rpggen node2 --config chars.yml
-$ poetry run rpggen all --config config.yml
+$ poetry run rpggen node1 --config examples/world.yml
+$ poetry run rpggen node2 --config examples/chars.yml
+$ poetry run rpggen all --config examples/config.yml
 ```
 
 Each node is implemented by subclassing `BaseNode` which defines the standard
