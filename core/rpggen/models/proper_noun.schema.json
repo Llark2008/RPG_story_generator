@@ -1,36 +1,35 @@
 {
   "properties": {
-    "id": {
-      "pattern": "^[a-z0-9_]+$",
-      "title": "Id",
-      "type": "string"
-    },
     "name": {
       "title": "Name",
       "type": "string"
     },
-    "era": {
+    "category": {
       "enum": [
-        "experimental",
-        "early",
-        "mature"
+        "technology",
+        "energy",
+        "faction",
+        "location",
+        "event",
+        "project",
+        "figure",
+        "other"
       ],
-      "title": "Era",
+      "title": "Category",
       "type": "string"
     },
     "description": {
-      "maxLength": 180,
-      "minLength": 100,
+      "maxLength": 100,
+      "minLength": 40,
       "title": "Description",
       "type": "string"
     }
   },
   "required": [
-    "id",
     "name",
-    "era",
+    "category",
     "description"
   ],
-  "title": "Technology",
+  "title": "ProperNoun",
   "type": "object"
 }

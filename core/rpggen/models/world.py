@@ -12,6 +12,7 @@ __all__ = [
     "Faction",
     "HistoricalEvent",
     "NotableFigure",
+    "ProperNoun",
     "World",
 ]
 
@@ -20,7 +21,7 @@ class Technology(BaseModel):
     id: str = Field(..., pattern="^[a-z0-9_]+$")
     name: str
     era: Literal["experimental", "early", "mature"]
-    description: str
+    description: str = Field(..., min_length=100, max_length=180)
 
 
 class SpecialEnergy(BaseModel):
@@ -30,7 +31,7 @@ class SpecialEnergy(BaseModel):
     properties: List[str]
     hazards: List[str]
     applications: Optional[List[str]] = None
-    description: str
+    description: str = Field(..., min_length=120)
 
 
 class Faction(BaseModel):
@@ -40,7 +41,7 @@ class Faction(BaseModel):
     doctrine: str
     status: Literal["active", "dormant", "destroyed"]
     founding_year: int
-    description: str
+    description: str = Field(..., min_length=100)
 
 
 class HistoricalEvent(BaseModel):
@@ -55,7 +56,22 @@ class NotableFigure(BaseModel):
     role: str
     birth: int
     death: Optional[int] = None
-    biography: str
+    biography: str = Field(..., min_length=100)
+
+
+class ProperNoun(BaseModel):
+    name: str
+    category: Literal[
+        "technology",
+        "energy",
+        "faction",
+        "location",
+        "event",
+        "project",
+        "figure",
+        "other",
+    ]
+    description: str = Field(..., min_length=40, max_length=100)
 
 
 class World(BaseModel):
@@ -66,6 +82,7 @@ class World(BaseModel):
     factions: List[Faction]
     historical_timeline: List[HistoricalEvent]
     notable_figures: List[NotableFigure]
+    proper_nouns: List[ProperNoun]
 
 
 # Auto export JSON schema for each primary model
@@ -79,6 +96,7 @@ for model_cls, name in [
     (Faction, "faction"),
     (HistoricalEvent, "historical_event"),
     (NotableFigure, "notable_figure"),
+    (ProperNoun, "proper_noun"),
 ]:
     schema_path = _schema_dir / f"{name}.schema.json"
     schema_path.write_text(

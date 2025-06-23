@@ -33,6 +33,7 @@
           "type": "integer"
         },
         "description": {
+          "minLength": 100,
           "title": "Description",
           "type": "string"
         }
@@ -111,6 +112,7 @@
           "title": "Death"
         },
         "biography": {
+          "minLength": 100,
           "title": "Biography",
           "type": "string"
         }
@@ -122,6 +124,41 @@
         "biography"
       ],
       "title": "NotableFigure",
+      "type": "object"
+    },
+    "ProperNoun": {
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "technology",
+            "energy",
+            "faction",
+            "location",
+            "event",
+            "project",
+            "figure",
+            "other"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 100,
+          "minLength": 40,
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "category",
+        "description"
+      ],
+      "title": "ProperNoun",
       "type": "object"
     },
     "SpecialEnergy": {
@@ -174,6 +211,7 @@
           "title": "Applications"
         },
         "description": {
+          "minLength": 120,
           "title": "Description",
           "type": "string"
         }
@@ -210,6 +248,8 @@
           "type": "string"
         },
         "description": {
+          "maxLength": 180,
+          "minLength": 100,
           "title": "Description",
           "type": "string"
         }
@@ -263,6 +303,13 @@
       },
       "title": "Notable Figures",
       "type": "array"
+    },
+    "proper_nouns": {
+      "items": {
+        "$ref": "#/$defs/ProperNoun"
+      },
+      "title": "Proper Nouns",
+      "type": "array"
     }
   },
   "required": [
@@ -272,7 +319,8 @@
     "special_energy",
     "factions",
     "historical_timeline",
-    "notable_figures"
+    "notable_figures",
+    "proper_nouns"
   ],
   "title": "World",
   "type": "object"
