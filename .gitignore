@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.env
+poetry.lock
+node_modules/
+.DS_Store

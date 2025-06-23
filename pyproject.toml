@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "rpggen"
+version = "0.1.0"
+description = "Logic-driven suspense RPG generator"
+authors = ["RPG Team <team@example.com>"]
+packages = [
+    {include = "rpggen", from = "core"}
+]
+
+[tool.poetry.scripts]
+rpggen = "rpggen.cli:main"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pydantic = ">=3"
+langchain = "*"
+typer = "*"
+pyyaml = "*"
+jinja2 = "*"
+faiss-cpu = "*"
+numpy = "*"
+networkx = "*"
+fastapi = "*"
+uvicorn = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
