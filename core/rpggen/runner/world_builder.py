@@ -35,10 +35,13 @@ class WorldBuilder(BaseNode):
     def build_prompt(self) -> str:
         schema = World.model_json_schema()
         base = (
-            "你是一位世界观设计师。基于以下控制参数生成符合给定 JSON 模型的数据，"
-            "仅返回 JSON:\n"
+            "你是一位经验丰富的世界观设计师。请仔细阅读下方的用戶需求(cfg)，"
+            "根据提供的输出格式(模型)生成 JSON 数据。"
+            "所有文本必须使用中文，并且只能返回有效的 JSON，"
+            "不要添加任何解释或多余内容。\n"
+            "用戶需求(cfg):\n"
             "{{ cfg | tojson(indent=2) }}\n"
-            "模型:\n"
+            "输出格式(模型):\n"
             "{{ schema | tojson(indent=2) }}\n"
         )
         template = Template(base + self.prompt_override)
