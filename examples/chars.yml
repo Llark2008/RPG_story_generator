@@ -1,0 +1,5 @@
+seed: 42
+characters_per_faction: 3
+name_style: mixed
+detail_level: extended
+allow_dead_characters: true

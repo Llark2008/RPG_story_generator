@@ -1,0 +1,6 @@
+seed: 42
+genre_mix:
+  sci_fi: 0.6
+  neo_noir: 0.4
+target_year: 2374
+num_factions: 4

@@ -81,12 +81,13 @@ importing `rpggen.models`. CI verifies they are up to date.
 ## Pipeline CLI
 
 The project ships with a small Typer-based command line application to run
-pipeline nodes. Two demo nodes are provided:
+pipeline nodes. Sample configuration files are provided under `examples/`.
+Two demo nodes are available:
 
 ```
-$ poetry run rpggen node1 --config world.yml
-$ poetry run rpggen node2 --config chars.yml
-$ poetry run rpggen all --config config.yml
+$ poetry run rpggen node1 --config examples/world.yml
+$ poetry run rpggen node2 --config examples/chars.yml
+$ poetry run rpggen all --config examples/config.yml
 ```
 
 Each node is implemented by subclassing `BaseNode` which defines the standard
