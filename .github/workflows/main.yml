@@ -1,15 +1,35 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
 
 jobs:
-  test:
+  lint-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4      # 拉取仓库代码
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Cache Poetry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pypoetry
+            ~/.cache/pip
+            .venv
+          key: ${{ runner.os }}-poetry-${{ hashFiles('pyproject.toml', 'poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
       - uses: snok/install-poetry@v1
-      - run: poetry install --no-interaction
-      - run: poetry run pytest -v
+      - run: poetry install --no-interaction --with dev
+      - name: Lint
+        run: poetry run ruff check .
+      - name: Test
+        run: poetry run pytest -m "not slow" -v
+      - name: Check schemas up-to-date
+        run: |
+          poetry run python -c 'import rpggen.models'
+          git diff --exit-code
