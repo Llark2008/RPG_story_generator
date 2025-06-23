@@ -7,8 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4      # 拉取仓库代码
-      - uses: actions/setup-python@v5  # 安装 Python 3.12
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-      - run: pip install -r requirements.txt
-      - run: pytest -v                 # 运行单元测试
+          python-version: '3.12'
+      - uses: snok/install-poetry@v1
+      - run: poetry install --no-interaction
+      - run: poetry run pytest -v
