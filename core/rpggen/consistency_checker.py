@@ -15,7 +15,10 @@ import re
 from langchain_core.language_models import BaseLanguageModel
 from langchain_core.embeddings import Embeddings
 from langchain_core.documents import Document
-from langchain_community.vectorstores import FAISS
+try:  # pragma: no cover - optional dependency
+    from langchain_community.vectorstores import FAISS
+except Exception:  # pragma: no cover - fallback if faiss unavailable
+    FAISS = None
 
 __all__ = ["ConsistencyChecker"]
 
@@ -35,20 +38,29 @@ class ConsistencyChecker:
         self.embeddings = embeddings
         self.score_threshold = score_threshold
         self.top_k = top_k
-        self._index: FAISS | None = None
+        self._index: object | None = None
 
     def build_index(self, texts: Sequence[str]) -> None:
-        """Build an in-memory FAISS index from ``texts``."""
-        self._index = FAISS.from_texts(list(texts), self.embeddings)
+        """Build an in-memory index from ``texts``."""
+        if FAISS is not None:
+            try:
+                self._index = FAISS.from_texts(list(texts), self.embeddings)
+                return
+            except Exception:  # pragma: no cover - faiss failed
+                pass
+        self._index = list(texts)
 
     def score(self, question: str) -> float:
         """Return the LLM predicted consistency score for ``question``."""
         if self._index is None:
             raise ValueError("index not built")
 
-        retriever = self._index.as_retriever(search_kwargs={"k": self.top_k})
-        docs: Iterable[Document] = retriever.invoke(question)
-        context = "\n".join(d.page_content for d in docs)
+        if FAISS is not None and not isinstance(self._index, list):
+            retriever = self._index.as_retriever(search_kwargs={"k": self.top_k})
+            docs: Iterable[Document] = retriever.invoke(question)
+            context = "\n".join(d.page_content for d in docs)
+        else:
+            context = "\n".join(self._index)
 
         prompt = (
             "You are a consistency checking assistant.\n"

@@ -5,6 +5,7 @@ from . import models
 from . import utils
 from .llm_client import OpenRouterClient
 from .consistency_checker import ConsistencyChecker
+from .runner.base_node import BaseNode
 
 __all__ = [
     "main",
@@ -12,5 +13,6 @@ __all__ = [
     "utils",
     "OpenRouterClient",
     "ConsistencyChecker",
+    "BaseNode",
 ] + list(models.__all__) + list(utils.__all__)
 
