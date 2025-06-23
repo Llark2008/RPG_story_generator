@@ -71,7 +71,9 @@ class ProperNoun(BaseModel):
         "figure",
         "other",
     ]
-    description: str = Field(..., min_length=40, max_length=100)
+    description: str = Field(
+        ..., min_length=10, max_length=100
+    )  # lowered min length but keep upper bound
 
 
 class World(BaseModel):
