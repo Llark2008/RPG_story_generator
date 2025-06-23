@@ -40,4 +40,4 @@ class Relations(BaseModel):
 
 _schema_dir = Path(__file__).resolve().parent
 _schema_path = _schema_dir / "relations.schema.json"
-_schema_path.write_text(json.dumps(Relations.model_json_schema(), indent=2))
+_schema_path.write_text(json.dumps(Relations.model_json_schema(), indent=2) + "\n")
