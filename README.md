@@ -60,3 +60,21 @@ uid = hash_id("some text")
 logger = get_logger("demo")
 ```
 
+## Development
+
+Install dependencies with [Poetry](https://python-poetry.org/):
+
+```bash
+poetry install --with dev
+```
+
+Run the linter and unit tests:
+
+```bash
+poetry run ruff check .
+poetry run pytest -m "not slow"
+```
+
+JSON schema files under `core/rpggen/models` are generated automatically when
+importing `rpggen.models`. CI verifies they are up to date.
+

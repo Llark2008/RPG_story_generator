@@ -29,6 +29,11 @@ python-dotenv = "*"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "*"
+ruff = "*"
+
+[tool.ruff]
+target-version = "py312"
+extend-ignore = ["E402", "F403", "F401"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
