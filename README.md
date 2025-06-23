@@ -78,3 +78,18 @@ poetry run pytest -m "not slow"
 JSON schema files under `core/rpggen/models` are generated automatically when
 importing `rpggen.models`. CI verifies they are up to date.
 
+## Pipeline CLI
+
+The project ships with a small Typer-based command line application to run
+pipeline nodes. Two demo nodes are provided:
+
+```
+$ poetry run rpggen node1 --config world.yml
+$ poetry run rpggen node2 --config chars.yml
+$ poetry run rpggen all --config config.yml
+```
+
+Each node is implemented by subclassing `BaseNode` which defines the standard
+`load_inputs → build_prompt → call_llm → parse → check_consistency → save` flow
+and built-in retry handling.
+
