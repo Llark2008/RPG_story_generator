@@ -48,6 +48,7 @@
       "title": "Applications"
     },
     "description": {
+      "minLength": 120,
       "title": "Description",
       "type": "string"
     }

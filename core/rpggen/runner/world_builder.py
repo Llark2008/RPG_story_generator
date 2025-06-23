@@ -40,6 +40,11 @@ class WorldBuilder(BaseNode):
             "所有文本必须使用中文，并且只能返回有效的 JSON，"
             "不要添加任何解释或多余内容。"
             "生成的描述不需要顾虑长度限制，务必详细。"
+            "所有描述字段需达到最小字数要求，"
+            "并额外生成 'proper_nouns' 专有名词表。"
+            "各字段最小字数如下：Technology.description ≥100，"
+            "SpecialEnergy.description ≥120，Faction.description ≥100，"
+            "NotableFigure.biography ≥100，ProperNoun.description 40-100。"
             "世界至少包含三大势力，并给出完整的设定说明。"
             "历史时间轴应充分展开，不能过于简短。"
             "'setting' 字段必须填写世界名称。\n"
@@ -56,14 +61,22 @@ class WorldBuilder(BaseNode):
         if not (os.environ.get("OPENROUTER_API_KEY") or os.environ.get("OPENAI_API_KEY")):
             # Offline fallback used during tests when no API key is configured
             stub = {
-                "setting": "stub", "global_theme": "stub", "technologies": [],
+                "setting": "stub",
+                "global_theme": "stub",
+                "technologies": [],
                 "special_energy": {
-                    "name": "stub", "discovery_year": 0,
-                    "physical_form": "field", "properties": [],
-                    "hazards": [], "applications": None, "description": ""
+                    "name": "stub",
+                    "discovery_year": 0,
+                    "physical_form": "field",
+                    "properties": [],
+                    "hazards": [],
+                    "applications": None,
+                    "description": "x" * 120,
                 },
-                "factions": [], "historical_timeline": [],
-                "notable_figures": []
+                "factions": [],
+                "historical_timeline": [],
+                "notable_figures": [],
+                "proper_nouns": []
             }
             return json.dumps(stub)
 
@@ -84,6 +97,11 @@ class WorldBuilder(BaseNode):
         ids = [f.id for f in parsed.factions]
         if len(ids) != len(set(ids)):
             self.logger.error("duplicate faction id")
+            return False
+        # proper noun names must be unique
+        names = [n.name for n in parsed.proper_nouns]
+        if len(names) != len(set(names)):
+            self.logger.error("duplicate proper noun")
             return False
         return True
 

@@ -31,6 +31,7 @@
       "type": "integer"
     },
     "description": {
+      "minLength": 100,
       "title": "Description",
       "type": "string"
     }

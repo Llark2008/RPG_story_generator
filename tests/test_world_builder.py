@@ -27,11 +27,13 @@ def test_world_builder_run(tmp_path, monkeypatch):
             "properties": [],
             "hazards": [],
             "applications": None,
-            "description": ""
+            "description": "x" * 120
         },
         "factions": [],
         "historical_timeline": [],
         "notable_figures": []
+        ,
+        "proper_nouns": []
     }
     response = json.dumps(data)
     monkeypatch.setattr(
@@ -43,4 +45,5 @@ def test_world_builder_run(tmp_path, monkeypatch):
     node = WorldBuilder(cfg)
     result = node.run()
     assert result.setting == "Test World"
+    assert result.proper_nouns == []
     assert (tmp_path / "world.json").exists()
