@@ -33,4 +33,4 @@ class NarrativeFlow(BaseModel):
 
 _schema_dir = Path(__file__).resolve().parent
 _schema_path = _schema_dir / "narrative_flow.schema.json"
-_schema_path.write_text(json.dumps(NarrativeFlow.model_json_schema(), indent=2))
+_schema_path.write_text(json.dumps(NarrativeFlow.model_json_schema(), indent=2) + "\n")

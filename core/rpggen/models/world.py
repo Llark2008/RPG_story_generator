@@ -82,5 +82,5 @@ for model_cls, name in [
 ]:
     schema_path = _schema_dir / f"{name}.schema.json"
     schema_path.write_text(
-        json.dumps(model_cls.model_json_schema(), indent=2)
+        json.dumps(model_cls.model_json_schema(), indent=2) + "\n"
     )
