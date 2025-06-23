@@ -21,7 +21,7 @@ class Technology(BaseModel):
     id: str = Field(..., pattern="^[a-z0-9_]+$")
     name: str
     era: Literal["experimental", "early", "mature"]
-    description: str = Field(..., min_length=100, max_length=180)
+    description: str = Field(..., min_length=40, max_length=180)
 
 
 class SpecialEnergy(BaseModel):
@@ -56,7 +56,7 @@ class NotableFigure(BaseModel):
     role: str
     birth: int
     death: Optional[int] = None
-    biography: str = Field(..., min_length=100)
+    biography: str = Field(..., min_length=40)
 
 
 class ProperNoun(BaseModel):
