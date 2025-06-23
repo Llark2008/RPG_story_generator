@@ -60,3 +60,15 @@ uid = hash_id("some text")
 logger = get_logger("demo")
 ```
 
+## Development
+
+Run lint and tests using Poetry:
+
+```bash
+poetry run ruff check core tests scripts
+poetry run pytest -m "not slow" -v
+```
+
+The CI workflow also verifies that JSON schema files are up to date by running
+`scripts/check_schemas.py`.
+
