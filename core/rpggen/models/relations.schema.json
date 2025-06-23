@@ -1,0 +1,130 @@
+{
+  "$defs": {
+    "Relation": {
+      "properties": {
+        "id": {
+          "pattern": "^[a-z0-9_]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "target_id": {
+          "title": "Target Id",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "mentor",
+            "rival",
+            "ally",
+            "family",
+            "betrayal",
+            "employer",
+            "client",
+            "unknown"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "direction": {
+          "enum": [
+            "directed",
+            "undirected"
+          ],
+          "title": "Direction",
+          "type": "string"
+        },
+        "start_year": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Year"
+        },
+        "end_year": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End Year"
+        },
+        "secrecy_level": {
+          "enum": [
+            "public",
+            "private",
+            "secret"
+          ],
+          "title": "Secrecy Level",
+          "type": "string"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "description": {
+          "maxLength": 120,
+          "minLength": 60,
+          "title": "Description",
+          "type": "string"
+        },
+        "evidence_seeds": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 4,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Seeds"
+        }
+      },
+      "required": [
+        "id",
+        "source_id",
+        "target_id",
+        "type",
+        "direction",
+        "secrecy_level",
+        "confidence",
+        "description"
+      ],
+      "title": "Relation",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "relations": {
+      "items": {
+        "$ref": "#/$defs/Relation"
+      },
+      "title": "Relations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "relations"
+  ],
+  "title": "Relations",
+  "type": "object"
+}

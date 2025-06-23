@@ -1,0 +1,49 @@
+{
+  "properties": {
+    "id": {
+      "pattern": "^[a-z0-9_]+$",
+      "title": "Id",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "motive": {
+      "title": "Motive",
+      "type": "string"
+    },
+    "doctrine": {
+      "title": "Doctrine",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "dormant",
+        "destroyed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "founding_year": {
+      "title": "Founding Year",
+      "type": "integer"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "motive",
+    "doctrine",
+    "status",
+    "founding_year",
+    "description"
+  ],
+  "title": "Faction",
+  "type": "object"
+}

@@ -1,0 +1,240 @@
+{
+  "$defs": {
+    "Event": {
+      "properties": {
+        "id": {
+          "pattern": "^E-\\d{2}-\\d{2}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "beat_id": {
+          "title": "Beat Id",
+          "type": "string"
+        },
+        "order": {
+          "exclusiveMinimum": 0,
+          "title": "Order",
+          "type": "integer"
+        },
+        "scene_type": {
+          "enum": [
+            "dialogue",
+            "investigation",
+            "action",
+            "cinematic",
+            "flashback"
+          ],
+          "title": "Scene Type",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "synopsis": {
+          "maxLength": 120,
+          "minLength": 40,
+          "title": "Synopsis",
+          "type": "string"
+        },
+        "location": {
+          "title": "Location",
+          "type": "string"
+        },
+        "absolute_ts": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Absolute Ts"
+        },
+        "characters": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Characters",
+          "type": "array"
+        },
+        "npcs": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Npcs"
+        },
+        "player_role": {
+          "enum": [
+            "direct_control",
+            "observer",
+            "flashback"
+          ],
+          "title": "Player Role",
+          "type": "string"
+        },
+        "objective": {
+          "title": "Objective",
+          "type": "string"
+        },
+        "success_state": {
+          "title": "Success State",
+          "type": "string"
+        },
+        "failure_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Failure State"
+        },
+        "branching_tags": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Branching Tags"
+        },
+        "clue_ids": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Clue Ids"
+        },
+        "puzzle": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Puzzle"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ambience_notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ambience Notes"
+        }
+      },
+      "required": [
+        "id",
+        "beat_id",
+        "order",
+        "scene_type",
+        "title",
+        "synopsis",
+        "location",
+        "characters",
+        "player_role",
+        "objective",
+        "success_state"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "Puzzle": {
+      "properties": {
+        "id": {
+          "pattern": "^PUZ-\\d{3}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "puzzle_type": {
+          "enum": [
+            "logic",
+            "pattern",
+            "riddle",
+            "skill"
+          ],
+          "title": "Puzzle Type",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "solution": {
+          "title": "Solution",
+          "type": "string"
+        },
+        "reward_clue": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reward Clue"
+        }
+      },
+      "required": [
+        "id",
+        "puzzle_type",
+        "description",
+        "solution"
+      ],
+      "title": "Puzzle",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Events",
+      "type": "array"
+    }
+  },
+  "required": [
+    "events"
+  ],
+  "title": "Events",
+  "type": "object"
+}

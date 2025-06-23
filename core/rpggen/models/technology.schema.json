@@ -1,0 +1,34 @@
+{
+  "properties": {
+    "id": {
+      "pattern": "^[a-z0-9_]+$",
+      "title": "Id",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "era": {
+      "enum": [
+        "experimental",
+        "early",
+        "mature"
+      ],
+      "title": "Era",
+      "type": "string"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "era",
+    "description"
+  ],
+  "title": "Technology",
+  "type": "object"
+}

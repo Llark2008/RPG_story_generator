@@ -1,0 +1,204 @@
+{
+  "$defs": {
+    "Beat": {
+      "properties": {
+        "id": {
+          "pattern": "^B\\d{2}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "order": {
+          "title": "Order",
+          "type": "integer"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "summary": {
+          "maxLength": 120,
+          "minLength": 40,
+          "title": "Summary",
+          "type": "string"
+        },
+        "protagonists": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 3,
+          "minItems": 1,
+          "title": "Protagonists",
+          "type": "array"
+        },
+        "antagonists": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 3,
+              "minItems": 1,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Antagonists"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Location"
+        },
+        "timestamp": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timestamp"
+        },
+        "conflict_type": {
+          "enum": [
+            "mystery",
+            "investigation",
+            "heist",
+            "pursuit",
+            "revelation",
+            "confrontation",
+            "escape",
+            "betrayal"
+          ],
+          "title": "Conflict Type",
+          "type": "string"
+        },
+        "stakes": {
+          "title": "Stakes",
+          "type": "string"
+        },
+        "clue_introduced": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Clue Introduced"
+        },
+        "foreshadow": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Foreshadow"
+        },
+        "is_twist": {
+          "title": "Is Twist",
+          "type": "boolean"
+        },
+        "tension_level": {
+          "maximum": 10,
+          "minimum": 1,
+          "title": "Tension Level",
+          "type": "integer"
+        },
+        "dependencies": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dependencies"
+        }
+      },
+      "required": [
+        "id",
+        "order",
+        "title",
+        "summary",
+        "protagonists",
+        "conflict_type",
+        "stakes",
+        "is_twist",
+        "tension_level"
+      ],
+      "title": "Beat",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "theme": {
+      "title": "Theme",
+      "type": "string"
+    },
+    "structure_mode": {
+      "enum": [
+        "three_act",
+        "kishotenketsu",
+        "linear"
+      ],
+      "title": "Structure Mode",
+      "type": "string"
+    },
+    "beats": {
+      "items": {
+        "$ref": "#/$defs/Beat"
+      },
+      "title": "Beats",
+      "type": "array"
+    },
+    "pacing_curve": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pacing Curve"
+    }
+  },
+  "required": [
+    "theme",
+    "structure_mode",
+    "beats"
+  ],
+  "title": "PlotOutline",
+  "type": "object"
+}

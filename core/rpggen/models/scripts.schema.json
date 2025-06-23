@@ -1,0 +1,190 @@
+{
+  "$defs": {
+    "DialogueLine": {
+      "properties": {
+        "speaker_id": {
+          "title": "Speaker Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "emotion": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": "",
+          "title": "Emotion"
+        },
+        "branch_tag": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": "",
+          "title": "Branch Tag"
+        }
+      },
+      "required": [
+        "speaker_id",
+        "text"
+      ],
+      "title": "DialogueLine",
+      "type": "object"
+    },
+    "EventScript": {
+      "properties": {
+        "meta": {
+          "$ref": "#/$defs/ScriptMeta"
+        },
+        "dialogues": {
+          "items": {
+            "$ref": "#/$defs/DialogueLine"
+          },
+          "minItems": 1,
+          "title": "Dialogues",
+          "type": "array"
+        },
+        "puzzle_text": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PuzzleText"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "stage_notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stage Notes"
+        }
+      },
+      "required": [
+        "meta",
+        "dialogues"
+      ],
+      "title": "EventScript",
+      "type": "object"
+    },
+    "PuzzleText": {
+      "properties": {
+        "puzzle_id": {
+          "pattern": "^PUZ-\\d{3}$",
+          "title": "Puzzle Id",
+          "type": "string"
+        },
+        "hint_success": {
+          "title": "Hint Success",
+          "type": "string"
+        },
+        "hint_failure": {
+          "title": "Hint Failure",
+          "type": "string"
+        },
+        "reward_clue_copy": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reward Clue Copy"
+        }
+      },
+      "required": [
+        "puzzle_id",
+        "hint_success",
+        "hint_failure"
+      ],
+      "title": "PuzzleText",
+      "type": "object"
+    },
+    "ScriptMeta": {
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "lang": {
+          "enum": [
+            "zh_CN",
+            "en_US",
+            "jp_JP"
+          ],
+          "title": "Lang",
+          "type": "string"
+        },
+        "pov": {
+          "title": "Pov",
+          "type": "string"
+        },
+        "scene_type": {
+          "title": "Scene Type",
+          "type": "string"
+        },
+        "branch_root": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Branch Root"
+        },
+        "word_count_est": {
+          "title": "Word Count Est",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "event_id",
+        "lang",
+        "pov",
+        "scene_type",
+        "word_count_est"
+      ],
+      "title": "ScriptMeta",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "scripts": {
+      "items": {
+        "$ref": "#/$defs/EventScript"
+      },
+      "title": "Scripts",
+      "type": "array"
+    }
+  },
+  "required": [
+    "scripts"
+  ],
+  "title": "ScriptsPackage",
+  "type": "object"
+}

@@ -1,0 +1,145 @@
+{
+  "$defs": {
+    "Condition": {
+      "properties": {
+        "expression": {
+          "title": "Expression",
+          "type": "string"
+        },
+        "required_clues": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Required Clues"
+        },
+        "required_events": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Required Events"
+        }
+      },
+      "required": [
+        "expression"
+      ],
+      "title": "Condition",
+      "type": "object"
+    },
+    "Transition": {
+      "properties": {
+        "id": {
+          "pattern": "^TR-[0-9A-F]{8}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "from_event": {
+          "title": "From Event",
+          "type": "string"
+        },
+        "to_event": {
+          "title": "To Event",
+          "type": "string"
+        },
+        "condition": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Condition"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "from_event",
+        "to_event"
+      ],
+      "title": "Transition",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "flow_mode": {
+      "enum": [
+        "linear",
+        "branching-tree",
+        "hub-spoke"
+      ],
+      "title": "Flow Mode",
+      "type": "string"
+    },
+    "default_pov": {
+      "enum": [
+        "single_character",
+        "multi_character",
+        "omniscient"
+      ],
+      "title": "Default Pov",
+      "type": "string"
+    },
+    "entry_event": {
+      "title": "Entry Event",
+      "type": "string"
+    },
+    "end_events": {
+      "items": {
+        "type": "string"
+      },
+      "title": "End Events",
+      "type": "array"
+    },
+    "timeline_order": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Timeline Order",
+      "type": "array"
+    },
+    "pov_map": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Pov Map",
+      "type": "object"
+    },
+    "transitions": {
+      "items": {
+        "$ref": "#/$defs/Transition"
+      },
+      "title": "Transitions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "flow_mode",
+    "default_pov",
+    "entry_event",
+    "end_events",
+    "timeline_order",
+    "pov_map",
+    "transitions"
+  ],
+  "title": "NarrativeFlow",
+  "type": "object"
+}

@@ -1,0 +1,279 @@
+{
+  "$defs": {
+    "Faction": {
+      "properties": {
+        "id": {
+          "pattern": "^[a-z0-9_]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "motive": {
+          "title": "Motive",
+          "type": "string"
+        },
+        "doctrine": {
+          "title": "Doctrine",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "active",
+            "dormant",
+            "destroyed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "founding_year": {
+          "title": "Founding Year",
+          "type": "integer"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "motive",
+        "doctrine",
+        "status",
+        "founding_year",
+        "description"
+      ],
+      "title": "Faction",
+      "type": "object"
+    },
+    "HistoricalEvent": {
+      "properties": {
+        "year": {
+          "title": "Year",
+          "type": "integer"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "year",
+        "title",
+        "description"
+      ],
+      "title": "HistoricalEvent",
+      "type": "object"
+    },
+    "NotableFigure": {
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "faction_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Faction Id"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "birth": {
+          "title": "Birth",
+          "type": "integer"
+        },
+        "death": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Death"
+        },
+        "biography": {
+          "title": "Biography",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "role",
+        "birth",
+        "biography"
+      ],
+      "title": "NotableFigure",
+      "type": "object"
+    },
+    "SpecialEnergy": {
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "discovery_year": {
+          "title": "Discovery Year",
+          "type": "integer"
+        },
+        "physical_form": {
+          "enum": [
+            "plasma",
+            "crystal",
+            "field",
+            "organism"
+          ],
+          "title": "Physical Form",
+          "type": "string"
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Properties"
+        },
+        "hazards": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Hazards",
+          "type": "array"
+        },
+        "applications": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Applications"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "discovery_year",
+        "physical_form",
+        "properties",
+        "hazards",
+        "description"
+      ],
+      "title": "SpecialEnergy",
+      "type": "object"
+    },
+    "Technology": {
+      "properties": {
+        "id": {
+          "pattern": "^[a-z0-9_]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "era": {
+          "enum": [
+            "experimental",
+            "early",
+            "mature"
+          ],
+          "title": "Era",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "era",
+        "description"
+      ],
+      "title": "Technology",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "setting": {
+      "title": "Setting",
+      "type": "string"
+    },
+    "global_theme": {
+      "title": "Global Theme",
+      "type": "string"
+    },
+    "technologies": {
+      "items": {
+        "$ref": "#/$defs/Technology"
+      },
+      "title": "Technologies",
+      "type": "array"
+    },
+    "special_energy": {
+      "$ref": "#/$defs/SpecialEnergy"
+    },
+    "factions": {
+      "items": {
+        "$ref": "#/$defs/Faction"
+      },
+      "title": "Factions",
+      "type": "array"
+    },
+    "historical_timeline": {
+      "items": {
+        "$ref": "#/$defs/HistoricalEvent"
+      },
+      "title": "Historical Timeline",
+      "type": "array"
+    },
+    "notable_figures": {
+      "items": {
+        "$ref": "#/$defs/NotableFigure"
+      },
+      "title": "Notable Figures",
+      "type": "array"
+    }
+  },
+  "required": [
+    "setting",
+    "global_theme",
+    "technologies",
+    "special_energy",
+    "factions",
+    "historical_timeline",
+    "notable_figures"
+  ],
+  "title": "World",
+  "type": "object"
+}

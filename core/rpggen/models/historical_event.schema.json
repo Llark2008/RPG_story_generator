@@ -1,0 +1,23 @@
+{
+  "properties": {
+    "year": {
+      "title": "Year",
+      "type": "integer"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    }
+  },
+  "required": [
+    "year",
+    "title",
+    "description"
+  ],
+  "title": "HistoricalEvent",
+  "type": "object"
+}
